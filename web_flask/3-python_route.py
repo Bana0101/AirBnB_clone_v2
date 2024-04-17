@@ -1,38 +1,53 @@
 #!/usr/bin/python3
-""" 3. Add third view func that redirects and has default val for variable """
+"""
+run a simple flask web app
+"""
 
 from flask import Flask
 
-
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/')
-def hello_world():
-    """ Returns some text. """
-    return 'Hello HBNB!'
+@app.route("/", strict_slashes=False)
+def hello_hbtn():
+    """
+    print hello hbtn
+    """
+    return "Hello HBNB!"
 
 
-@app.route('/hbnb')
-def hello():
-    """ Return other text. """
-    return 'HBNB'
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """
+    print hbnb
+    """
+    return "HBNB"
 
 
-@app.route('/c/<text>')
-def c_text(text):
-    """ replace text with variable. """
-    text = text.replace('_', ' ')
-    return 'C {}'.format(text)
+@app.route("/c/<text>", strict_slashes=False)
+def c(text):
+    """
+    print text
+    """
+    x = text.replace('_', ' ')
+    return "C " + x
 
 
-@app.route('/python/')
-@app.route('/python/<text>')
-def python_text(text='is cool'):
-    """ replace more text with another variable. """
-    text = text.replace('_', ' ')
-    return 'Python {}'.format(text)
+@app.route("/python", strict_slashes=False)
+def py():
+    """
+    print text
+    """
+    return "Python is cool"
+
+
+@app.route("/python/<text>", strict_slashes=False)
+def pytxt(text="is cool"):
+    """
+    print text
+    """
+    x = text.replace('_', ' ')
+    return "Python " + x
 
 
 if __name__ == '__main__':

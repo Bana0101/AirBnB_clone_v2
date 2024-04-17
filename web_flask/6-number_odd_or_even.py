@@ -1,59 +1,79 @@
 #!/usr/bin/python3
-""" 5. Add fifth view func that displays HTML page if n is int """
+"""
+run a simple flask web app
+"""
 
 from flask import Flask
 from flask import render_template
 
-
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route('/')
-def hello_world():
-    """ Returns some text. """
-    return 'Hello HBNB!'
+@app.route("/", strict_slashes=False)
+def hello_hbtn():
+    """
+    print hello hbtn
+    """
+    return "Hello HBNB!"
 
 
-@app.route('/hbnb')
-def hello():
-    """ Return other text. """
-    return 'HBNB'
+@app.route("/hbnb", strict_slashes=False)
+def hbnb():
+    """
+    print hbnb
+    """
+    return "HBNB"
 
 
-@app.route('/c/<text>')
-def c_text(text):
-    """ replace text with variable. """
-    text = text.replace('_', ' ')
-    return 'C {}'.format(text)
+@app.route("/c/<text>", strict_slashes=False)
+def c(text):
+    """
+    print text
+    """
+    x = text.replace('_', ' ')
+    return "C " + x
 
 
-@app.route('/python/')
-@app.route('/python/<text>')
-def python_text(text='is cool'):
-    """ replace more text with another variable. """
-    text = text.replace('_', ' ')
-    return 'Python {}'.format(text)
+@app.route("/python", strict_slashes=False)
+def py():
+    """
+    print text
+    """
+    return "Python is cool"
 
 
-@app.route('/number/<int:n>')
-def number_text(n):
-    """ replace with int only if given int. """
-    n = str(n)
-    return '{} is a number'.format(n)
+@app.route("/python/<text>", strict_slashes=False)
+def pytxt(text="is cool"):
+    """
+    print text
+    """
+    x = text.replace('_', ' ')
+    return "Python " + x
 
 
-@app.route('/number_template/<int:n>')
-def html_num(n):
-    """ display html if n is int. """
-    n = str(n)
-    return render_template('5-number.html', n=n)
+@app.route("/number/<int:n>", strict_slashes=False)
+def isnum(n):
+    """
+    is num
+    """
+    return f'{n} is a number'
 
 
-@app.route('/number_odd_or_even/<int:n>')
-def odd_or_even(n):
-    """ display different page depending on var given odd or even. """
-    return render_template('6-number_odd_or_even.html', n=n)
+@app.route("/number_template/<int:n>", strict_slashes=False)
+def numtmp(n):
+    """
+    is num
+    """
+    return render_template('5-number.html', num=n)
+
+
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+def oddOrEven(n):
+    """
+    is odd or even
+    """
+    t = "even" if n % 2 == 0 else "odd"
+    return render_template('6-number_odd_or_even.html', num=n, typ=t)
 
 
 if __name__ == '__main__':
